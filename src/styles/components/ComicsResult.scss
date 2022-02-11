@@ -1,0 +1,41 @@
+.comics-result {
+    @include displayFlex-center;
+    justify-content: space-evenly;
+    padding: 15px 0;
+    border: 1px solid $primary-color;
+    border-left: none;
+    border-right: none;
+
+    &-img {
+        width: 100px;
+        height: 140px;
+        margin: 0;
+
+        img {
+            width: 100px;
+            height: 140px;
+        }
+    }
+
+    &-description {
+        @include displayFlex-center;
+        flex-direction: column;
+        width: 70%
+    }
+
+    &-descriptionTitle, &-descriptionDetails {
+        @include displayFlex-center;
+        align-items: flex-start;
+        width: 100%;
+
+        h4 {
+            width: 120px;
+            margin: 15px 0 0 0;
+        }
+
+        p {
+            width: 100%;
+            margin: 15px 0 0 10px;
+        }
+    }
+}

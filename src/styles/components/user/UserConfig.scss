@@ -1,0 +1,23 @@
+.user-config {
+    position: absolute;
+    display: none;
+
+    &-password {
+        &:hover {
+            text-decoration: underline;
+        }
+        a {
+            color: $font-color1;
+            text-decoration: none;
+        }
+    }
+    &-logout {
+        &:hover {
+            text-decoration: underline;
+        }
+        a {
+            color: $font-color1;
+            text-decoration: none;
+        }
+    }
+}

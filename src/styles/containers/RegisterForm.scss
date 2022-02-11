@@ -1,0 +1,31 @@
+.register-form {
+    @include displayFlex-center;
+    width: 360px;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 20px;
+    background-color: $secondary-color;
+
+    &-title {
+        text-align: center;
+    }
+}
+
+.form-register-credentials {
+    @include displayFlex-center;
+    flex-direction: column;
+}
+
+.register-options {
+    margin-bottom: 20px;
+    &-login {
+        margin-bottom: 10px;
+        text-align: center;
+        font-size: 13px;
+        color: $font-color1;
+        a {
+            color: $font-color1;
+        }
+        
+    }
+}

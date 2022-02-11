@@ -1,0 +1,60 @@
+.login-form {
+    @include displayFlex-center;
+    width: 360px;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 20px;
+    background-color: $secondary-color;
+
+    &-title {
+        text-align: center;
+    }
+}
+
+.form-login {
+    &-credentials, &-social {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.login-options {
+    margin-bottom: 20px;
+    &-forgotPassword, &-register {
+        margin-bottom: 10px;
+        text-align: center;
+        font-size: 13px;
+        color: $font-color1;
+        a {
+            color: $font-color1;
+        }
+        
+    }
+}
+
+
+.button {
+
+    &-login-facebook, &-login-google {
+        width: 220px;
+        height: 30px;
+        margin-bottom: 15px;
+        border-radius: 15px;
+        color: $light-color;
+        text-transform: uppercase;
+        font-family: $font1;
+        font-weight: 600;
+        font-size: 11px;
+        letter-spacing: 2px;
+    }
+
+    &-login-facebook {
+        background-color: $facebook-color;
+    }
+
+    &-login-google {
+        background-color: $google-color;
+    }
+
+}

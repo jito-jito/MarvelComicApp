@@ -1,0 +1,36 @@
+.character-result {
+    border: 1px solid $primary-color;
+    border-left: none;
+    border-right: none;
+
+    &-container {
+        @include displayFlex-center;
+        width: 100%;
+        justify-content: space-between;
+    }
+   
+
+    &-img {
+        flex-grow: .0;
+        width: 60px;
+        height: 70px;
+
+
+        img {
+            width: 60px;
+            height: 70px;
+        }
+    }
+    &-name {
+        flex-grow: 2;
+    }
+
+    &-checkbox {
+        flex-grow: 1;
+    }
+
+
+
+
+}
+    

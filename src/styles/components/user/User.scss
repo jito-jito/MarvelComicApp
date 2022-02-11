@@ -1,0 +1,22 @@
+.user {
+    position: relative;
+    height: 100%;
+
+    /// toggle menu
+    &:hover > .user-config {
+        display: block
+    }
+
+    &-container {
+        @include displayFlex-center;
+        height: 100%;
+    }
+
+    &-photo {
+        margin: 0 5px 0 5px;
+    }
+
+    &-name {
+        margin: 0 15px 0 5px;
+    }
+}

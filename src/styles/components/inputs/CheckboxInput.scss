@@ -1,0 +1,51 @@
+.checkbox {
+
+    &-label {
+        @include displayFlex-center;
+
+    }
+    &-label:hover {
+        cursor: pointer;
+    }
+
+    &-input {
+        display: none;
+
+    }
+
+    &-img-search {
+        display:inline-block;
+        width: 20px;
+        height: 20px;
+        background-image: url('../../../assets/images/Frame\ 2.png');        
+        padding: 0 0 0 0px;
+    }
+
+    &-input:checked + &-img-search {
+        background-image: url('../../../assets/images/FrameActive3.png');
+    }
+
+    &-img-charResults {
+        display:inline-block;
+        width: 40px;
+        height: 40px;
+        background-image: url('../../../assets/images/hover.png');        
+        padding: 0 0 0 0px;
+    }
+
+    &-input:checked + &-img-charResults {
+        background-image: url('../../../assets/images/hoverActive.png');
+    }
+
+    &-img-favorite {
+        display:inline-block;
+        width: 22px;
+        height: 22px;
+        background-image: url('../../../assets/images/icons8-estrella-24.png');        
+        padding: 0 0 0 0px;
+    }
+
+    &-input:checked + &-img-favorite {
+        background-image: url('../../../assets/images/estrella\ 1.png');
+    }
+}

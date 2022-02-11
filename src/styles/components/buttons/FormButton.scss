@@ -1,0 +1,43 @@
+.form-button {
+    background-color: $light-color;
+    color: $primary-color;
+    border: none;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+
+.defaultButton {
+    width: 120px;
+    height: 40px;
+    margin: 15px 0 30px 0;
+    border-radius: 30px;
+    text-transform: uppercase;
+    font-family: $font1;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 2px;
+    
+}
+
+.comicResult {
+    width: 140px;
+    margin: 0 45px 0 0;
+    align-self: end;
+}
+
+
+.comicRandomAdd {
+    width: 260px;
+    height: 35px;
+    margin: 0;
+    background-color: $dark-color;
+    color: $light-color;
+}
+
+.mainProfile {
+    align-self: center;
+    width: 200px;
+}

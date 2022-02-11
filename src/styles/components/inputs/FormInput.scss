@@ -1,0 +1,23 @@
+.form-input {
+    
+    background: none;
+    color: $font-color1;
+    border: none;
+    border-bottom: 1px solid white;
+    font-family: $font1;
+
+    &:focus {
+        outline: none;
+
+    }
+}
+
+
+.defaultInput {
+    width: 220px;
+    height: 40px;
+    margin-bottom: 10px;
+    font-family: $font1;
+    font-size: 13px;
+
+}

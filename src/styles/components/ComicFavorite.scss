@@ -1,0 +1,23 @@
+.comicFavorite {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 160px;
+    height: 245px;
+
+    
+    &-img {
+        width: inherit;
+        height: inherit;
+        margin: 0;
+
+        img {
+            width: inherit;
+            height: inherit;
+        }
+    }
+
+    &-title {
+        margin: 5px;
+    }
+}

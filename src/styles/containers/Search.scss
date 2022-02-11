@@ -1,0 +1,15 @@
+.checkboxes{
+    font-family: $font1;
+    color: $font-color1;
+
+    &-title {
+        font-family: $font1;
+        color: $font-color1;
+    }
+
+    &-container {
+        @include displayFlex-center;
+        width: 90%;
+        justify-content: space-around;
+    }
+}

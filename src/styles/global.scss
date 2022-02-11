@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+
+
+$font1: 'Ubuntu', sans-serif;
+$font-color1: #CDCDCD;
+$primary-color: #0A0A0A;
+$secondary-color: rgba(43, 43, 43, 0.42);
+$light-color: #FFFFFF;
+$dark-color: #000;
+
+$facebook-color: #292EB2;
+$google-color: #D01515;
+
+$hasBackgroundImage: true;
+
+@if $hasBackgroundImage {
+    $font-color1: #fff;
+    $primary-color: rgba(10, 10, 10, 0.87);
+    $secondary-color: rgba(43, 43, 43, 0.85);
+}
+  
+
+
+
+@mixin layout-padding {
+    padding: 0 50px 0 50px;
+}
+
+@mixin displayFlex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+
+body {
+    margin: 0;
+    box-sizing: border-box;
+    // background-color: $primary-color;
+    background-image: url('../assets/images/marvel-comics-wallpaper-4k-fondo-de-pantalla-hd-y-descarga-de-fondo.jpg');
+    font-family: $font1;
+    color: $font-color1
+}
+
+
+
+
+@import './components/user/User.scss';
+@import './components/user/UserConfig.scss';
+@import './components/inputs/FormInput.scss';
+@import './components/buttons/FormButton.scss';
+@import './components/Footer.scss';
+@import './components/inputs/SearchInput.scss';
+@import './components/inputs/CheckboxInput.scss';
+@import './components/CharacterResult.scss';
+@import './components/ScrollBar.scss';
+@import './components/ComicsResult.scss';
+@import './components/ComicFavorite.scss';
+
+
+@import './containers/Header.scss';
+@import './containers/LoginForm.scss';
+@import './containers/RegisterForm.scss';
+@import './containers/Search.scss';
+@import './containers/ResultsContainer.scss';
+
+@import './pages/LoginPage.scss';
+@import './pages/RegisterPage.scss';
+@import './pages/MainPage.scss';
+@import './pages/MainProfilePage.scss';
