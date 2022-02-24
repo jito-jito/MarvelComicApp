@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-function CheckboxInput({ 
+function CheckboxFavoriteComic({ 
     value, 
     content, 
     id, 
@@ -34,4 +34,4 @@ function CheckboxInput({
 }
 
 
-export  { CheckboxInput }
+export  { CheckboxFavoriteComic }

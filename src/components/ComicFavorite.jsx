@@ -1,16 +1,16 @@
 import React from 'react';
 import comicImg from '../assets/images/comicImage.png';
 
-function ComicFavorite() {
+function ComicFavorite( { img, title }) {
 
 
     return (
         <>
             <article className='comicFavorite'>
                 <figure className='comicFavorite-img'>
-                    <img src={comicImg} alt="" />
+                    <img src={img} alt="" />
                 </figure>
-                <h4 className='comicFavorite-title'>comic title</h4>
+                <h4 className='comicFavorite-title'>{title}</h4>
             </article>
         </>
     )

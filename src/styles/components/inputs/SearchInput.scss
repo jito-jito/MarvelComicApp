@@ -16,6 +16,7 @@
    
     
     &-container {
+        @include displayFlex-center;
         position: relative;
         z-index: 1;
         width: 510px;
@@ -26,15 +27,22 @@
         background-color: $secondary-color;
         color: $font-color1;
 
-
-        &:after {
-            position: relative;
-            top: 2px;
-            padding: 12px 0 0 12px;
-            content: url('../../../assets/images/icon.png');
-        }
     }
     
+    &-button {
+        position: relative;
+        width: 30px;
+        height: 30px;
+        padding: 12px 0 0 12px;
+        border-radius: 100%;
+        background-color: transparent;
+        background-image: url('../../../assets/images/icon.png');
+        background-repeat: no-repeat;
+        background-position: (5px, 5px);
+    
+    }
+ 
+
     &-img {
         position: relative;
         z-index: 10;
