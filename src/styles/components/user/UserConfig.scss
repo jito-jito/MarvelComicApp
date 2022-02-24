@@ -1,6 +1,10 @@
 .user-config {
     position: absolute;
     display: none;
+    width: 100%;
+    padding: 0 15px 0 5px;
+    text-align: end;
+
 
     &-password {
         &:hover {

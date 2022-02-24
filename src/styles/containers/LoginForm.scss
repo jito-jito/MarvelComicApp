@@ -9,6 +9,16 @@
     &-title {
         text-align: center;
     }
+    
+    &-message-error {
+        color: red;
+
+    }
+    &-message-error, &-message-loading {
+        margin: 0;
+        font-weight: 500;
+        position: relative;
+    }
 }
 
 .form-login {
@@ -58,3 +68,4 @@
     }
 
 }
+

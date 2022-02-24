@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-function FormButton({ value, className }) {
+function FormButton({ value, className, onClick  }) {
 
     return(
         <>
@@ -9,6 +9,8 @@ function FormButton({ value, className }) {
                 className={`form-button ${className}`}
                 type='button'
                 value={value} 
+                onClick={onClick}
+                
             />
         </>
     )
