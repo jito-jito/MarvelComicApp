@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckboxInput } from './inputs/CheckboxInput';
+import { CheckboxInput } from '../components/inputs/CheckboxInput';
 
 import charImage  from '../assets/images/charImage.png'
 

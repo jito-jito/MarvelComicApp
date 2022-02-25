@@ -1,5 +1,5 @@
 import React from 'react';
-import { User } from '../components/user/User';
+import { User } from './User';
 import { logOut } from '../utils/auth/singOut';
 
 
