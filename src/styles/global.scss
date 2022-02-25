@@ -42,7 +42,7 @@ body {
     margin: 0;
     box-sizing: border-box;
     // background-color: $primary-color;
-    background-image: url('../assets/images/marvel-comics-wallpaper-4k-fondo-de-pantalla-hd-y-descarga-de-fondo.jpg');
+    background-image: url('../assets/images/marvelComicsWallpaper.jpg');
     font-family: $font1;
     color: $font-color1
 }
@@ -50,24 +50,25 @@ body {
 
 
 
-@import './components/user/User.scss';
+
 @import './components/user/UserConfig.scss';
 @import './components/inputs/FormInput.scss';
 @import './components/buttons/FormButton.scss';
 @import './components/Footer.scss';
 @import './components/inputs/SearchInput.scss';
 @import './components/inputs/CheckboxInput.scss';
-@import './components/CharacterResult.scss';
 @import './components/ScrollBar.scss';
-@import './components/ComicsResult.scss';
 @import './components/ComicFavorite.scss';
-
+@import './components/buttons/DeleteButton.scss';
 
 @import './containers/Header.scss';
 @import './containers/LoginForm.scss';
 @import './containers/RegisterForm.scss';
 @import './containers/Search.scss';
 @import './containers/ResultsContainer.scss';
+@import './containers/User.scss';
+@import './containers/CharacterResult.scss';
+@import './containers/ComicsResult.scss';
 
 @import './pages/LoginPage.scss';
 @import './pages/RegisterPage.scss';

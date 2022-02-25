@@ -2,18 +2,21 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 160px;
-    height: 245px;
+    width: 180px;
+    height: 265px;
 
     
     &-img {
+        position: relative;
         width: inherit;
         height: inherit;
         margin: 0;
-
+        padding: 15px;
+        background-color: rgba(229,218,194, 2%);
+        
         img {
-            width: inherit;
-            height: inherit;
+            width: 100%;
+            height: 100%;
         }
     }
 

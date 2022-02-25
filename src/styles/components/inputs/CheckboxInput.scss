@@ -17,35 +17,35 @@
         display:inline-block;
         width: 20px;
         height: 20px;
-        background-image: url('../../../assets/images/Frame\ 2.png');        
+        background-image: url('../../../assets/images/selectIcon.png');        
         padding: 0 0 0 0px;
     }
 
     &-input:checked + &-img-search {
-        background-image: url('../../../assets/images/FrameActive3.png');
+        background-image: url('../../../assets/images/selectClickedIcon.png');
     }
 
     &-img-charResults {
         display:inline-block;
         width: 40px;
         height: 40px;
-        background-image: url('../../../assets/images/hover.png');        
+        background-image: url('../../../assets/images/searchComicIcon.png');        
         padding: 0 0 0 0px;
     }
 
     &-input:checked + &-img-charResults {
-        background-image: url('../../../assets/images/hoverActive.png');
+        background-image: url('../../../assets/images/searchComicSelectIcon.png');
     }
 
     &-img-favorite {
         display:inline-block;
         width: 22px;
         height: 22px;
-        background-image: url('../../../assets/images/icons8-estrella-24.png');        
+        background-image: url('../../../assets/images/favoriteIcon.png');     
         padding: 0 0 0 0px;
     }
 
     &-input:checked + &-img-favorite {
-        background-image: url('../../../assets/images/estrella\ 1.png');
+        background-image: url('../../../assets/images/favoriteHoverIcon.png');
     }
 }

@@ -1,13 +1,10 @@
 import React from 'react';
-import { CharacterResult } from '../components/CharacterResult';
-import { FakeCharacterResult } from '../components/FakeCharacterResult';
-import { ComicsResult } from '../components/ComicsResult';
-import { FakeComicsResult } from '../components/FakeComicsResult';
-import { FormButton } from '../components/buttons/FormButton';
+import { CharacterResult } from './CharacterResult';
+import { ComicsResult } from './ComicsResult';
 
 
 function ResultsContainer( { charactersData, comicsData, searchComics, saveComic } ) {
-    // console.log(comicsData)
+
     return (
         <>
             <section className='results-container'>
@@ -21,7 +18,6 @@ function ResultsContainer( { charactersData, comicsData, searchComics, saveComic
                             searchComics={searchComics}
                         > 
                             <ComicsResult 
-                                // key={character.id}
                                 comicsData={comicsData} 
                                 characterId={character.id}
                                 saveComic={saveComic}
