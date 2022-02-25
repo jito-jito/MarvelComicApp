@@ -4,14 +4,25 @@ import { ComicFavorite } from '../containers/ComicFavorite';
 import { FormButton } from '../components/buttons/FormButton';
 import { UserContext } from '../UserContext'
 import { Link, useNavigate } from 'react-router-dom';
-
+import { getUser } from '../utils/lib/getUser'
+import { updateUserComics } from '../utils/lib/updateUserComics'
 
 
 function MainProfilePage() {
-    const { userData, loadingUserData, userSavedComics } = useContext(UserContext)
+    const { userData, loadingUserData, userSavedComics, setUserSavedComics } = useContext(UserContext)
+
+    async function deleteComic(e, comicId) {
+    
+        const userDbId = await getUser(userData)
+        let selectedComicData = userSavedComics.find((comic) => comic.comicId == comicId)
+        selectedComicData.id = selectedComicData.comicId
+        const deleteComic = await updateUserComics(userDbId, selectedComicData)
+        let newComics = userSavedComics.filter((comic) => comic.comicId != selectedComicData.comicId)
+
+        setUserSavedComics(newComics)
+    }
 
     let navigate = useNavigate()
-    console.log(userSavedComics)
     return(
         <>
             <Layout>
@@ -39,9 +50,10 @@ function MainProfilePage() {
                                 {userSavedComics.map(comic => (
                                     <ComicFavorite
                                         key={comic.comicId}
+                                        comicId={comic.comicId}
                                         img={`${comic.images[0].path}.${comic.images[0].extension}`}
                                         title={comic.title}
-                                    
+                                        deleteComic={deleteComic}
                                     />
                                 ))}
                                                             
