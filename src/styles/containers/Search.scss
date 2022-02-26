@@ -1,3 +1,13 @@
+.search {
+    @include displayFlex-center;
+    flex-direction: column;
+    @media (max-width: 530px) {
+        width: 100%;
+        margin: 0 20px;
+    }
+}
+
+
 .checkboxes{
     font-family: $font1;
     color: $font-color1;
@@ -6,10 +16,39 @@
         font-family: $font1;
         color: $font-color1;
     }
+    &-title::after {
+        content: ':'
+    }
 
     &-container {
         @include displayFlex-center;
         width: 90%;
         justify-content: space-around;
+    }
+    &-optionsContainer {
+        @include displayFlex-center;
+        justify-content: space-around;
+        
+        > label {
+            margin: 0 5px;
+        }
+    }
+
+
+    @media (max-width: 480px) {
+        &-container {
+            flex-direction: column;
+            width: 100%;
+            margin: 15px 0
+        }
+        &-optionsContainer {
+            width: inherit;
+        }
+        &-title {
+            margin: 0 0 10px 0;
+        }
+        &-title::after {
+            content: ''
+        }
     }
 }

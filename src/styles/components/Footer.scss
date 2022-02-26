@@ -1,7 +1,12 @@
 .footer {
     @include displayFlex-center;
     justify-content: center;
-    height: 5vh;
+    height: 8vh;
     background-color: $secondary-color;
     font-size: 14px;
+
+    &-text {
+        margin: 8px 0;
+        text-align: center;
+    }
 }

@@ -73,20 +73,23 @@ function Search( { searchCharacters } ) {
                     onClick={ () => searchCharacters(searchOptions, searchValue) }
                 />
                 <div className='checkboxes-container'>
-                    <p className='checkboxes-title'>Limit of results:</p>
-                    {
-                        searchOptions.map(({value, checked}) => (
-                            <CheckboxInput 
-                                key={value} 
-                                id={value} 
-                                value={value} 
-                                content={`${value} Results`} 
-                                checkboxType='search'
-                                onClick={setOptions}
-                                checked={checked}
-                            />
-                        ))
-                    }
+                    <p className='checkboxes-title'>Limit of results</p>
+                    <div className='checkboxes-optionsContainer'>
+                        {
+                            searchOptions.map(({value, checked}) => (
+                                <CheckboxInput 
+                                    key={value} 
+                                    id={value} 
+                                    value={value} 
+                                    content={`${value} Results`} 
+                                    checkboxType='search'
+                                    onClick={setOptions}
+                                    checked={checked}
+                                />
+                            ))
+                        }
+                    </div>
+                    
                 </div>
             </div>
                     

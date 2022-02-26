@@ -4,7 +4,8 @@
     width: 100%;
     padding: 0 15px 0 5px;
     text-align: end;
-
+    z-index: 20;
+    background: $secondary-color;
 
     &-password {
         &:hover {

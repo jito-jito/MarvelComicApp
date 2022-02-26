@@ -28,4 +28,9 @@
     &-name {
         margin: 0 15px 0 5px;
     }
+
+    @media (max-width: 545px) {
+        width: 170px; 
+    
+    }
 }

@@ -4,6 +4,7 @@ import { FormButton } from '../components/buttons/FormButton';
 import { UserContext } from '../UserContext'
 
 
+
 function ComicsResult({ comicsData, characterId, saveComic }) {
     const { userSavedComics } = useContext(UserContext)
     function goToMarvelPage(url) {
@@ -30,13 +31,16 @@ function ComicsResult({ comicsData, characterId, saveComic }) {
                     
                     <section className='comics-result' key={comic.id}>
             
-                        <CheckboxInput 
-                            checkboxType="favorite" 
-                            id={comic.id}
-                            onClick={saveComic}
-                            checked={isInFavorites}
-                        />
+                        
                         <figure className='comics-result-img'>
+                            <CheckboxInput 
+                                className="favorite" 
+                                checkboxType="favorite" 
+                                id={comic.id}
+                                onClick={saveComic}
+                                checked={isInFavorites}
+                            />
+                            
                             <img src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`} alt="" />
                         </figure>
                         <article className='comics-result-description'>
@@ -46,7 +50,7 @@ function ComicsResult({ comicsData, characterId, saveComic }) {
                             </section>
                             <section className='comics-result-descriptionDetails'>
                                 <h4>Description:</h4>
-                                <p>{comic.description}</p>
+                                <p>{comic.description ? comic.description : 'none description'}</p>
                             </section>
                         
                             <FormButton 
