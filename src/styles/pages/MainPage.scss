@@ -6,3 +6,57 @@
     padding: 5px;
     background-color: $primary-color;
 }
+
+
+.loading {
+    &-main-page {
+        @include displayFlex-center;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 100%;
+        height: 82vh;
+        padding: 5px;
+        background-color: $primary-color;
+    }
+
+    &-search {
+        @include displayFlex-center;
+        flex-direction: column;
+        width: 100%;
+      
+    }
+
+    &-search > div:first-child {
+        width: 530px;
+        height: 30px;
+        // margin: 10px 0;
+
+    }
+
+    &-search > div:last-child {
+        width: 530px;
+        height: 15px;
+        margin-top: 20px;
+
+    }
+
+    &-searchResults {
+        width: 530px;
+        height: 65%;
+    }
+
+    @media (max-width: 570px) {
+        &-search > div:first-child {
+            width: 95%;
+        }
+    
+        &-search > div:last-child {
+            width: 95%;
+        }
+    
+        &-searchResults {
+            width: 95%;
+        }
+    }
+}
+

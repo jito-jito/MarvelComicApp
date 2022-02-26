@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { UserConfig } from '../components/user/UserConfig.jsx';
 import { UserContext } from '../UserContext';
 
+import Skeleton from 'react-loading-skeleton'
+
 
 function User( {userName, userPhoto, logOut} ) {
     const { userData, loadingUserData } = useContext(UserContext)
@@ -15,11 +17,11 @@ function User( {userName, userPhoto, logOut} ) {
                         <Link to="/">sign in</Link> to see this page
                     </h1> */}
                 </> : ''
-                
-                
             }
             { loadingUserData && !userData ?
-                <h1>loading Data....</h1> : ''
+                <div className='loading-user'>
+                    <Skeleton width='100%' height='100%'/>
+                </div> : ''
             }
             { !loadingUserData && userData ?
                 <div className='user'>
@@ -32,7 +34,6 @@ function User( {userName, userPhoto, logOut} ) {
                     <UserConfig logOut={logOut} />
                 
                 </div> : ''
-                
             }
 
         </>

@@ -1,0 +1,16 @@
+.signOut-mainPage {
+    @include displayFlex-center;
+    height: 82vh;
+    padding: 5px;
+    background-color: $primary-color;
+
+
+    &-title {
+        text-align: center;
+    }
+
+    &-title > a {
+       color: $font-color1;
+    }
+   
+}

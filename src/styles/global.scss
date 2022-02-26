@@ -52,7 +52,7 @@ body {
 }
 
 
-
+@import './skeleton.scss';
 
 
 @import './components/user/UserConfig.scss';
@@ -78,3 +78,4 @@ body {
 @import './pages/RegisterPage.scss';
 @import './pages/MainPage.scss';
 @import './pages/MainProfilePage.scss';
+@import './pages/SignOutPage.scss';

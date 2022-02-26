@@ -4,6 +4,10 @@ import { Search } from '../containers/Search.jsx';
 import { ResultsContainer } from '../containers/ResultsContainer';
 import { UserContext } from '../UserContext';
 import { Link } from 'react-router-dom';
+import { SignOutPage } from './SignOutPage';
+
+import Skeleton from 'react-loading-skeleton'
+
 
 import { getUser } from '../utils/lib/getUser';
 import { updateUserComics } from '../utils/lib/updateUserComics';
@@ -90,14 +94,24 @@ function MainPage() {
             <Layout>
                 { !loadingUserData && !userData ?
                     <>
-                        <h1>
-                            <Link to="/">sign in</Link> to see this page
-                        </h1>
+                        <SignOutPage/>
                     </> : ''
                 }
                 { loadingUserData && !userData ?
                     <>
-                        <h1>loading Data....</h1>
+                        <div className='loading-main-page'>
+                            <div className='loading-search'>
+                                <div>
+                                    <Skeleton width='100%' height='100%'/>
+                                </div>
+                                <div>
+                                    <Skeleton width='100%' height='100%'/>
+                                </div>
+                            </div>
+                            <div className='loading-searchResults'>
+                                <Skeleton width='100%' height='100%'/>
+                            </div>
+                        </div>      
                     </> : ''
                 }
                 { !loadingUserData && userData ?
@@ -110,8 +124,8 @@ function MainPage() {
                                 searchComics={searchComics} 
                                 comicsData={comicsData}                                 
                                 saveComic={saveComic}
-                            />
-                        </div> 
+                            />                      
+                        </div>   
                     </> : ''
                 }
             </Layout>

@@ -6,7 +6,9 @@ import { UserContext } from '../UserContext'
 import { Link, useNavigate } from 'react-router-dom';
 import { getUser } from '../utils/lib/getUser'
 import { updateUserComics } from '../utils/lib/updateUserComics'
+import { SignOutPage } from './SignOutPage'
 
+import Skeleton from 'react-loading-skeleton'
 
 function MainProfilePage() {
     const { userData, loadingUserData, userSavedComics, setUserSavedComics } = useContext(UserContext)
@@ -22,62 +24,81 @@ function MainProfilePage() {
         setUserSavedComics(newComics)
     }
 
+    console.log(!loadingUserData, userData == true, userSavedComics)
     let navigate = useNavigate()
     return(
         <>
             <Layout>
-                {  !loadingUserData && !userData ?  
+                { !loadingUserData && !userData ?  
                     <>
-                        <h1><Link to="/">sign in</Link> to see this page</h1>
+                        <SignOutPage/>
                     </> : '' 
                 }
-                { loadingUserData && !userData || !userSavedComics ? 
+                { !loadingUserData && userData && userSavedComics == undefined ? 
                     <>
-                        <h1>loading Data....</h1>
+                        <div className='loading-mainProfilePage'>
+                            <div className='loading-mainProfilePage-title'>
+                                <div>
+                                    <Skeleton width='100%' height='100%'/>
+                                </div>
+                                <div>
+                                    <Skeleton width='100%' height='100%'/>
+                                </div>
+                            </div>
+                            <div className='loading-mainProfilePage-comics'>
+                                <div>
+                                    <Skeleton width='100%' height='100%'/>
+                                </div>
+                                <div>
+                                    <Skeleton width='100%' height='100%'/>
+                                </div>
+                                <div>
+                                    <Skeleton width='100%' height='100%'/>
+                                </div>
+                                <div>
+                                    <Skeleton width='100%' height='100%'/>
+                                </div>                                
+                            </div>
+                        </div>
                     </> : '' 
                 }
-                { !userSavedComics ? 
-                    <>
-                        <h1>loading Data....</h1>
-                    </> : '' 
-                }
-                { !loadingUserData && userData && userSavedComics != undefined ?
+                { userSavedComics ?
                     <>
                         <main className='mainProfile-page'>
-                            <h1 className='mainProfile-userTitle'>Hello {userData.displayName}</h1>
-                            <h1 className='mainProfile-title'>Your favorite comics:</h1>
-                            <section className='favoriteComics-container'>
-                                {userSavedComics.map(comic => (
-                                    <ComicFavorite
-                                        key={comic.comicId}
-                                        comicId={comic.comicId}
-                                        img={ comic.images[0] ? `${comic.images[0].path}.${comic.images[0].extension}` : `${comic.thumbnail.path}.${comic.thumbnail.extension}`}
-                                        title={comic.title}
-                                        deleteComic={deleteComic}
-                                    />
-                                ))}
-                                                            
-                            </section>
-                            <FormButton className={'defaultButton mainProfile'} value='search more comics' onClick={() => navigate("/search", { replace: true })} />
-                        </main>
+                            {userSavedComics.length >= 1 ?
+                                <>
+                                    <h1 className='mainProfile-userTitle'>Hello {userData.displayName}</h1>
+                                    <h1 className='mainProfile-title'>Your favorite comics:</h1>
+                                    <section className='favoriteComics-container'>
+                                        {userSavedComics.map(comic => (
+                                            <ComicFavorite
+                                                key={comic.comicId}
+                                                comicId={comic.comicId}
+                                                img={ comic.images[0] ? `${comic.images[0].path}.${comic.images[0].extension}` : `${comic.thumbnail.path}.${comic.thumbnail.extension}`}
+                                                title={comic.title}
+                                                deleteComic={deleteComic}
+                                            />
+                                        ))}
+                                                                    
+                                    </section>
+                                    <FormButton className={'defaultButton mainProfile'} value='search more comics' onClick={() => navigate("/search", { replace: true })} />
+                                </>
+                                :
+                                <>
+                                    <section className='mainProfile-page-withoutData'>
+                                        <h1>Hello {userData.displayName}</h1>
+                                        <p>go to the main page to search comics</p>                      
+                                        <FormButton className={'defaultButton mainProfile'} value='search comics' onClick={() => navigate("/search", { replace: true })} />
+                                    </section>
+                                    
+                                </>
+                              
+                            }
+                            
+                        </main> 
                     </> : ''
                     
-                   
                 }
-
-                {/* { !loadingUserData && userData && userSavedComics.length == 0 ?
-                    <>
-                        <main className='mainProfile-page'>
-                            <h1>Hello {userData.displayName}</h1>
-                            <p>go to the main page to search comics</p>                      
-                            <FormButton className={'defaultButton mainProfile'} value='search more comics' onClick={() => navigate("/search", { replace: true })} />
-                        </main>
-                
-                    </> : ''
-                } */}
-             
-                    
-                
             </Layout>
         </>
     )
