@@ -5,7 +5,7 @@ function Footer( ) {
     return(
         <>
             <footer className='footer'>
-                <p className='footer-text'>developed by jito-jito</p>
+                <p className='footer-text'>Data provided by Marvel. © 2014 Marvel<br />developed by jito-jito ❤</p>
             </footer>
         </>
     )

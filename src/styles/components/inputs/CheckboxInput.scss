@@ -38,6 +38,7 @@
     }
 
     &-img-favorite {
+        
         display:inline-block;
         width: 22px;
         height: 22px;
@@ -45,7 +46,29 @@
         padding: 0 0 0 0px;
     }
 
+    &-label.favorite {
+        position: relative;
+        left: -15%;
+    }
+
+
     &-input:checked + &-img-favorite {
         background-image: url('../../../assets/images/favoriteHoverIcon.png');
+    }
+
+    @media (max-width: 750px) {
+
+        &-label.favorite {
+            left: -7%;
+        }
+
+    }
+
+    @media (max-width: 530px) {
+
+        &-label.favorite {
+            left: -15%;
+        }
+
     }
 }

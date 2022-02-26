@@ -50,6 +50,11 @@
         height: 15px;
     }
 
-
+    @media (max-width: 530px) {
+        &-container {
+            width: 100%;
+        }
+    
+    }
     
 }

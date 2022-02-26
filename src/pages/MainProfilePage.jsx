@@ -44,14 +44,14 @@ function MainProfilePage() {
                 { !loadingUserData && userData && userSavedComics != undefined ?
                     <>
                         <main className='mainProfile-page'>
-                            <h1>Hello {userData.displayName}</h1>
-                            <h1>Your favorite comics:</h1>
+                            <h1 className='mainProfile-userTitle'>Hello {userData.displayName}</h1>
+                            <h1 className='mainProfile-title'>Your favorite comics:</h1>
                             <section className='favoriteComics-container'>
                                 {userSavedComics.map(comic => (
                                     <ComicFavorite
                                         key={comic.comicId}
                                         comicId={comic.comicId}
-                                        img={`${comic.images[0].path}.${comic.images[0].extension}`}
+                                        img={ comic.images[0] ? `${comic.images[0].path}.${comic.images[0].extension}` : `${comic.thumbnail.path}.${comic.thumbnail.extension}`}
                                         title={comic.title}
                                         deleteComic={deleteComic}
                                     />

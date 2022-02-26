@@ -23,7 +23,11 @@ $hasBackgroundImage: true;
 
 
 @mixin layout-padding {
-    padding: 0 50px 0 50px;
+    padding: 0 50px;
+
+    @media (max-width: 629px) {
+        padding: 0 20px;
+    }
 }
 
 @mixin displayFlex-center{
