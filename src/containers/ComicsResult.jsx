@@ -15,7 +15,7 @@ function ComicsResult({ comicsData, characterId, saveComic }) {
     
     return (
         <>
-            { comicsData && characterId == comicsData.id ?
+            { comicsData && characterId === comicsData.id ?
                 <div className='results-container-comics'>
                         <h3>List of comics by character</h3>
                         <FormButton className='defaultButton comicRandomAdd'

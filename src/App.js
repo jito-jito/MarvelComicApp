@@ -21,12 +21,7 @@ function App() {
 
 
   onAuthStateChanged(auth, async (user) => {
-    if (user) {      
-      const uid = user.uid;
-      const email = user.email
-      const name = user.displayName
-      const photo = user.photoURL
-  
+    if (user) {        
       await setUserData( user )
 
     } else {
@@ -36,11 +31,15 @@ function App() {
     }
   });
    
-  useEffect(async() => {
+  useEffect(() => {
     
-    const userDbId = await getUser(userData)
-    const userComics = await getUserComics(userDbId)
-    setUserSavedComics( userComics )
+    async function fetchData() {
+      const userDbId = await getUser(userData)
+      const userComics = await getUserComics(userDbId)
+      setUserSavedComics( userComics )
+    }
+  
+    fetchData()
     
   }, [userData])
 

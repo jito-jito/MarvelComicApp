@@ -7,8 +7,8 @@ function UserConfig({ logOut }) {
     return(
         <>
             <div className='user-config'>
-                { location.pathname == '/search' ? 
-                    <p className='user-config-password'><Link to="/profile"href="">profile</Link></p> : ''
+                { location.pathname === '/search' ? 
+                    <p className='user-config-password'><Link to="/profile">profile</Link></p> : ''
                 }
                 <p className='user-config-password'><a href="">change password</a></p>
                 <p className='user-config-logout'><Link to="/" href="" onClick={logOut}>sign out</Link></p>

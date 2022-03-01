@@ -1,4 +1,4 @@
-import { doc, updateDoc, getDocs, getDoc, query, where, collection, setDoc, addDoc, deleteDoc } from "firebase/firestore";
+import {getDocs, collection } from "firebase/firestore";
 import { db } from './firebase';
 
 async function getUserComics(userId) {    
