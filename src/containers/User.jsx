@@ -10,14 +10,7 @@ function User( {userName, userPhoto, logOut} ) {
 
     return(
         <>
-              
-            { !loadingUserData && !userData ?
-                <>
-                    {/* <h1>
-                        <Link to="/">sign in</Link> to see this page
-                    </h1> */}
-                </> : ''
-            }
+    
             { loadingUserData && !userData ?
                 <div className='loading-user'>
                     <Skeleton width='100%' height='100%'/>

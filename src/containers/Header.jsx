@@ -1,7 +1,7 @@
 import React from 'react';
 import { User } from './User';
 import { logOut } from '../utils/auth/singOut';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 function Header() {
 

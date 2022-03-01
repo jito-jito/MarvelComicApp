@@ -44,8 +44,7 @@ function App() {
     
   }, [userData])
 
-  console.log(userSavedComics)
-  console.log(userData)
+
   return (
     <UserContext.Provider value={ 
     { 

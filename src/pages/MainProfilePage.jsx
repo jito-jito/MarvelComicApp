@@ -24,7 +24,6 @@ function MainProfilePage() {
         setUserSavedComics(newComics)
     }
 
-    console.log(!loadingUserData, userData == true, userSavedComics)
     let navigate = useNavigate()
     return(
         <>

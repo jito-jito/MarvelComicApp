@@ -12,12 +12,9 @@ function Search( { searchCharacters } ) {
 
     function onHandleChange(e) {
         setSearchValue(e.target.value)
-        
-
     }
 
     function setOptions(e) {
-        // console.dir(e)
         const lastChecked = searchOptions.findIndex( option => option.checked == true )
         const opIndex = searchOptions.findIndex( option => option.value == e.target.children[0].id )
 

@@ -3,11 +3,25 @@ import { CharacterResult } from './CharacterResult';
 import { ComicsResult } from './ComicsResult';
 
 
-function ResultsContainer( { charactersData, comicsData, searchComics, saveComic } ) {
+function ResultsContainer( { charactersData, comicsData, searchComics, saveComic, loadingCharacters } ) {
 
     return (
         <>
-            <section className='results-container'>
+            { loadingCharacters === '' ?
+                <section className='results-container'>
+
+                </section> : ''
+            }
+            {loadingCharacters === true ? 
+                <>
+                    <section className='results-container'>
+                        <h1>loading...</h1>
+                    </section>
+                </>
+                : ''
+            }
+            { loadingCharacters === false && charactersData ?
+                <section className='results-container'>
                 { charactersData ?
                     charactersData.map((character) => (
                         <CharacterResult
@@ -26,7 +40,9 @@ function ResultsContainer( { charactersData, comicsData, searchComics, saveComic
                     )) : ''
                 }
                 
-            </section>
+                </section> : ''
+            }
+            
         </>
     )
 }
