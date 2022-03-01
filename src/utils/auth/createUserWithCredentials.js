@@ -8,8 +8,8 @@ async function registerUser(email, password) {
         console.log(user)
         return user
     } catch (error) {
-        console.error(error)
-        return error
+        // console.error(error)
+        return error.message
     }
 
 

@@ -5,17 +5,27 @@ import { UserContext } from '../UserContext'
 
 
 
-function ComicsResult({ comicsData, characterId, saveComic }) {
+function ComicsResult({ comicsData, characterId, saveComic, errors, loadings }) {
     const { userSavedComics } = useContext(UserContext)
     function goToMarvelPage(url) {
         window.open(url, "_blank");
     }
 
-
+    console.log(errors)
     
     return (
         <>
-            { comicsData && characterId === comicsData.id ?
+            { characterId === loadings.characterLoading && loadings.loadingComics ?
+                <div className='results-container-comics'>
+                        <h3>loading...</h3>
+                </div> : ''
+            }
+            { comicsData && characterId === comicsData.id && errors.errorInFindComics ?
+                <div className='results-container-comics'>
+                        <h3>No comics founded in API</h3>
+                </div> : ''
+            }
+            { comicsData && characterId === comicsData.id && !errors.errorInFindComics ?
                 <div className='results-container-comics'>
                         <h3>List of comics by character</h3>
                         <FormButton className='defaultButton comicRandomAdd'
@@ -23,7 +33,7 @@ function ComicsResult({ comicsData, characterId, saveComic }) {
                 </div> : ''
             }
            
-            { comicsData && characterId == comicsData.id ?
+            { comicsData && characterId == comicsData.id && !errors.errorInFindComics ?
                comicsData.data.map((comic) => {
                 let isInFavorites = userSavedComics.some((savedComic) => savedComic.comicId == comic.id)
         

@@ -29,3 +29,28 @@
         
     }
 }
+
+
+.loading-registerForm {
+
+    position: relative;
+    border: 8px solid #6a6969;
+    border-top: 8px solid #ffffff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 2s linear infinite;
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+   
+
+}
+
+.error-registerForm {
+    margin: 1px 0;
+    color: #ea2b2b;
+    font-weight: 500;
+}

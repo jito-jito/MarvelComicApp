@@ -29,13 +29,13 @@
         display:inline-block;
         width: 40px;
         height: 40px;
-        background-image: url('../../../assets/images/searchComicIcon.png');        
+        background-image: url('../../../assets/images/searchComicSelectIcon.png');        
         padding: 0 0 0 0px;
     }
 
-    &-input:checked + &-img-charResults {
-        background-image: url('../../../assets/images/searchComicSelectIcon.png');
-    }
+    // &-input:checked + &-img-charResults {
+    //     background-image: url('../../../assets/images/searchComicSelectIcon.png');
+    // }
 
     &-img-favorite {
         

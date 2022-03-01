@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { UserConfig } from '../components/user/UserConfig.jsx';
 import { UserContext } from '../UserContext';
-
+import userDefaultIcon from '../assets/images/userDefaultIcon.png'
 import Skeleton from 'react-loading-skeleton'
 
 
@@ -20,7 +20,7 @@ function User( {userName, userPhoto, logOut} ) {
                 <div className='user'>
                     <div className='user-container'>
                         <figure className='user-photo'>
-                            <img src={userData.photoURL} alt='userPhoto'/>
+                            <img src={userData.photoURL ? userData.photoURL : userDefaultIcon} alt=''/>
                         </figure>
                         <p className='user-name'>{userData.displayName}</p>
                     </div>

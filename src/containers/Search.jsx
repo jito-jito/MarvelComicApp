@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { SearchInput } from '../components/inputs/SearchInput';
 import { CheckboxInput } from '../components/inputs/CheckboxInput'
 
-function Search( { searchCharacters } ) {
+function Search( { searchCharacters, setErrors, setLoadings } ) {
     const [ searchValue, setSearchValue ] = useState('')
     const [ searchOptions, setSearchOptions ] = useState([
         {value: 10, checked: false}, 
@@ -11,6 +11,9 @@ function Search( { searchCharacters } ) {
 
 
     function onHandleChange(e) {
+        
+        setLoadings(prevState => ({...prevState, loading: ''}))
+        setErrors({ error: false })
         setSearchValue(e.target.value)
     }
 
