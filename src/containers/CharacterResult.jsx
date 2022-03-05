@@ -3,7 +3,13 @@ import { CheckboxInput } from '../components/inputs/CheckboxInput';
 
 
 
-function CharacterResult({ img, name, id, children, searchComics, loadings }) {
+function CharacterResult({ 
+    img, 
+    name, 
+    id, 
+    children, 
+    searchComics
+}) {
 
     return (
         <>

@@ -12,6 +12,7 @@ import Skeleton from 'react-loading-skeleton'
 
 function MainProfilePage() {
     const { userData, loadingUserData, userSavedComics, setUserSavedComics } = useContext(UserContext)
+    let navigate = useNavigate()
 
     async function deleteComic(e, comicId) {
     
@@ -24,48 +25,63 @@ function MainProfilePage() {
         setUserSavedComics(newComics)
     }
 
-    let navigate = useNavigate()
+
+
+    const signOutState = () => { return ( !loadingUserData && !userData ?    
+        <>
+            <SignOutPage/>
+        </>  
+     : '')
+    }
+    const loadingPageState = () => { return ( loadingUserData && (!userData || userData)  ? 
+        <>
+            <div className='loading-mainProfilePage'>
+                <div className='loading-mainProfilePage-title'>
+                    <div>
+                        <Skeleton width='100%' height='100%'/>
+                    </div>
+                    <div>
+                        <Skeleton width='100%' height='100%'/>
+                    </div>
+                </div>
+                <div className='loading-mainProfilePage-comics'>
+                    <div>
+                        <Skeleton width='100%' height='100%'/>
+                    </div>
+                    <div>
+                        <Skeleton width='100%' height='100%'/>
+                    </div>
+                    <div>
+                        <Skeleton width='100%' height='100%'/>
+                    </div>
+                    <div>
+                        <Skeleton width='100%' height='100%'/>
+                    </div>                                
+                </div>
+            </div>
+        </> : '' 
+    )}
+    const successUserLoadedState = () => userSavedComics.length > 0 && userData
+    const userWithoutComicsState = () => { return (!loadingUserData && userSavedComics.length == 0 && userData ? 
+        <main className='mainProfile-page'>
+            <section className='mainProfile-page-withoutData'>
+                <h1>Hello {userData.displayName}</h1>
+                <p>go to the main page to search comics</p>                      
+                <FormButton className={'defaultButton mainProfile'} value='search comics' onClick={() => navigate("/search", { replace: true })} />
+            </section> 
+        </main>
+        : ''  
+    )}
+
     return(
         <>
             <Layout>
-                { !loadingUserData && !userData ?  
-                    <>
-                        <SignOutPage/>
-                    </> : '' 
-                }
-                { !loadingUserData && userData && userSavedComics == undefined ? 
-                    <>
-                        <div className='loading-mainProfilePage'>
-                            <div className='loading-mainProfilePage-title'>
-                                <div>
-                                    <Skeleton width='100%' height='100%'/>
-                                </div>
-                                <div>
-                                    <Skeleton width='100%' height='100%'/>
-                                </div>
-                            </div>
-                            <div className='loading-mainProfilePage-comics'>
-                                <div>
-                                    <Skeleton width='100%' height='100%'/>
-                                </div>
-                                <div>
-                                    <Skeleton width='100%' height='100%'/>
-                                </div>
-                                <div>
-                                    <Skeleton width='100%' height='100%'/>
-                                </div>
-                                <div>
-                                    <Skeleton width='100%' height='100%'/>
-                                </div>                                
-                            </div>
-                        </div>
-                    </> : '' 
-                }
-                { userSavedComics ?
+                { signOutState() }
+                { loadingPageState() }
+                { userWithoutComicsState() }
+                { successUserLoadedState() ?
                     <>
                         <main className='mainProfile-page'>
-                            {userSavedComics.length >= 1 ?
-                                <>
                                     <h1 className='mainProfile-userTitle'>Hello {userData.displayName}</h1>
                                     <h1 className='mainProfile-title'>Your favorite comics:</h1>
                                     <section className='favoriteComics-container'>
@@ -80,20 +96,11 @@ function MainProfilePage() {
                                         ))}
                                                                     
                                     </section>
-                                    <FormButton className={'defaultButton mainProfile'} value='search more comics' onClick={() => navigate("/search", { replace: true })} />
-                                </>
-                                :
-                                <>
-                                    <section className='mainProfile-page-withoutData'>
-                                        <h1>Hello {userData.displayName}</h1>
-                                        <p>go to the main page to search comics</p>                      
-                                        <FormButton className={'defaultButton mainProfile'} value='search comics' onClick={() => navigate("/search", { replace: true })} />
-                                    </section>
-                                    
-                                </>
-                              
-                            }
-                            
+                                    <FormButton 
+                                        className={'defaultButton mainProfile'} 
+                                        value='search more comics' 
+                                        onClick={() => navigate("/search", { replace: true })} 
+                                    />
                         </main> 
                     </> : ''
                     

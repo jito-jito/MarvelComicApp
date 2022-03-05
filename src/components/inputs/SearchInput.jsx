@@ -1,7 +1,12 @@
 import React from 'react';
 
 
-function SearchInput( { placeholder, value, onChange, onClick } ) {
+function SearchInput({
+    placeholder, 
+    value, 
+    onChange,
+    onClick 
+}) {
 
     return(
         <>

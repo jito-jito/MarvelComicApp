@@ -15,28 +15,31 @@ import { getUserComics } from './utils/lib/getUserComics'
 
 
 function App() {
-  const [ userData, setUserData ] = useState()
-  const [ userSavedComics, setUserSavedComics ] = useState()
-  const [ loadingUserData, setloadingUserData ] = useState( false )
-
+  const [ userData, setUserData ] = useState(null)
+  const [ userSavedComics, setUserSavedComics ] = useState( [] )
+  const [ loadingUserData, setloadingUserData ] = useState( true )
 
   onAuthStateChanged(auth, async (user) => {
     if (user) {        
-      await setUserData( user )
+      setUserData( user )
 
     } else {
       console.log('user signed out')
       setUserData(null)
-      setUserSavedComics(null)
+
     }
   });
    
   useEffect(() => {
-    
+    setUserSavedComics([])
     async function fetchData() {
-      const userDbId = await getUser(userData)
-      const userComics = await getUserComics(userDbId)
-      setUserSavedComics( userComics )
+      if(userData) {
+        const userDbId = await getUser(userData)
+        const userComics = await getUserComics(userDbId)
+        setloadingUserData(false)
+        setUserSavedComics( userComics )
+      }
+   
     }
   
     fetchData()

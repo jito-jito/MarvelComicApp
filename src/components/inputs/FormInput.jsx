@@ -1,7 +1,14 @@
 import React from 'react';
 
 
-function FormInput({ placeHolder, className, type, value,  onChange, id}) {
+function FormInput({ 
+    placeHolder, 
+    className, 
+    type, 
+    value,  
+    onChange, 
+    id
+}) {
 
     return(
         <>

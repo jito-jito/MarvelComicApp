@@ -1,7 +1,12 @@
 import React from 'react';
 import { DeleteButton } from '../components/buttons/DeleteButton'
 
-function ComicFavorite( { img, title, comicId, deleteComic }) {
+function ComicFavorite({ 
+    img,
+    title, 
+    comicId, 
+    deleteComic 
+}) {
 
 
     return (

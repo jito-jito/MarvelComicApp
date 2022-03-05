@@ -10,7 +10,6 @@ async function updateUserData(name) {
             // photoURL: "https://example.com/jane-q-user/profile.jpg"
           })
           
-        // console.log(updateData)
     } catch (error) {
         console.log(error)
     }

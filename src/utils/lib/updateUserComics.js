@@ -37,7 +37,7 @@ async function updateUserComics(userDbId, comicData) {
                 urls: comicData.urls ? comicData.urls : 'none'
                 
             }
-            console.log(newDoc)
+            // console.log(newDoc)
             return {status: 'added', data: newDoc}
 
         } else {

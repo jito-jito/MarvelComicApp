@@ -5,18 +5,24 @@ import userDefaultIcon from '../assets/images/userDefaultIcon.png'
 import Skeleton from 'react-loading-skeleton'
 
 
-function User( {userName, userPhoto, logOut} ) {
+function User({
+    logOut
+}) {
     const { userData, loadingUserData } = useContext(UserContext)
+
+
+    const loadingState = () => { return (loadingUserData && (!userData || userData) ?
+        <div className='loading-user'>
+            <Skeleton width='100%' height='100%'/>
+        </div> : '') 
+    }
+    const successLoadedState = () => !loadingUserData && userData
 
     return(
         <>
     
-            { loadingUserData && !userData ?
-                <div className='loading-user'>
-                    <Skeleton width='100%' height='100%'/>
-                </div> : ''
-            }
-            { !loadingUserData && userData ?
+            { loadingState() }
+            { successLoadedState() ?
                 <div className='user'>
                     <div className='user-container'>
                         <figure className='user-photo'>

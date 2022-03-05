@@ -1,7 +1,6 @@
 import { 
     GoogleAuthProvider, 
-    signInWithRedirect, 
-    getRedirectResult
+    signInWithRedirect
 } from "firebase/auth";
 import { auth } from '../../lib/firebase'
 

@@ -1,39 +1,38 @@
+//react
 import React, { useContext, useState } from 'react';
 import { Layout } from '../containers/Layout';
 import { Search } from '../containers/Search.jsx';
 import { ResultsContainer } from '../containers/ResultsContainer';
 import { UserContext } from '../UserContext';
 import { SignOutPage } from './SignOutPage';
-
+import { CharacterResult } from '../containers/CharacterResult';
+import { ComicsResult } from '../containers/ComicsResult';
 import Skeleton from 'react-loading-skeleton'
 
-
+//firebase
 import { getUser } from '../utils/lib/getUser';
 import { updateUserComics } from '../utils/lib/updateUserComics';
+
+//utils
+import { getData } from '../utils/getData';
 
 
 function MainPage() {
     const { userData, loadingUserData, userSavedComics, setUserSavedComics } = useContext(UserContext)
     const [ charactersData, setCharactersData ] = useState('')
     const [ comicsData, setComicsData ] = useState('')
-    const [ errors, setErrors ] = useState({
-        error: false,
-      
-    })
-    const [ loadings, setLoadings ] = useState({
-        loading: '',
-        loadingCharacters: false
-    })
-    // const [ loadingCharacters, setLoadingCharacters ] = useState( {
-        
-    // })
+    const [ pageState, setPageState ] = useState(
+        {
+            error: false,
+            loading: ''
+        }
+    )
+
     
     async function searchCharacters( options, searchValue ) {
-
-        setLoadings(prevState => ({...prevState, loading: true}))
+        setPageState(prevState => ({...prevState, loading: true}))
 
         let limitOfResults = options.find((option) => option.checked === true)
-
         if (!limitOfResults) {
             limitOfResults = {
                 value: 3
@@ -41,54 +40,45 @@ function MainPage() {
         }   
 
         try {
-            const fetchCharacters = await fetch(`https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${searchValue}&limit=${limitOfResults.value}&apikey=${'9cc3527121e6c8ccdd2aa38a39d5d38f'}`)
-            const results = await fetchCharacters.json()
-            // console.log(results)
-            // if (results.code == 403) {
-            //     console.log('characters not founded in marvel api')
-            // }
-            if (results.code != 200) {
+            const findCharacters = await getData(`https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${searchValue}&limit=${limitOfResults.value}&apikey=${process.env.REACT_APP_MARVEL_API_KEY}`)
+
+            if (findCharacters.code != 200) {
                 throw 'error in get data'
             }
-            if( results.data.count == 0 ) {
-                setLoadings(prevState => ({...prevState, loading: false}))
-                setErrors(prevState => ({ ...prevState, errorInFindCharacters: true }))
-                
-                
-                // console.log(loadingCharacters)
+            if( findCharacters.data.count == 0 ) {
+                setPageState(prevState => ({...prevState, loading: false, errorInFindCharacters: true}))
+                setCharactersData([])
             }
-
-            setLoadings(prevState => ({...prevState, loading: false}))
-            setCharactersData( results.data.results )
-
-
-
+            if( findCharacters.data.count > 0) {
+                setPageState(prevState => ({...prevState, loading: false, errorInFindCharacters: false }))
+                setCharactersData( findCharacters.data.results )
+            }
+            
         } catch (error) {
-            console.log(error)
+            console.error(error)
         }
     }
 
     async function searchComics(e, characterId) {
-        setErrors({ error: false })
-        setLoadings(prevState => ({...prevState, loadingComics: true,  characterLoading: characterId}))
-        try {
-            const fetchComics = await fetch(`https://gateway.marvel.com:443/v1/public/characters/${characterId}/comics?apikey=${'9cc3527121e6c8ccdd2aa38a39d5d38f'}`)
-            const results = await fetchComics.json()
+        setPageState(prevState => ({...prevState, error: false, loadingComics: true,  characterLoading: characterId, errorInFindComics: false }))
 
-            console.log(results)
-      
-            if (results.code != 200) {
+        try {
+            const findComics = await getData(`https://gateway.marvel.com:443/v1/public/characters/${characterId}/comics?apikey=${process.env.REACT_APP_MARVEL_API_KEY}`)
+            
+            if (findComics.code != 200) {
                 throw 'error in get data'
             }
-
-            if (results.data.count == 0) {
-                console.log('comocs not founded in marvel api')
-                setLoadings(prevState => ({...prevState, loadingComics: false,}))
-                setErrors(prevState => ({ ...prevState, errorInFindComics: true }))
+            
+            if (findComics.data.count == 0) {
+                console.log('comics not found in marvel api')
+                setPageState(prevState => ({...prevState, loadingComics: false,  errorInFindComics: true, characterLoading: characterId}))
             }
 
-            setLoadings(prevState => ({...prevState, loadingComics: false}))
-            setComicsData( { id: characterId, data: results.data.results } )
+            if(findComics.data.count > 0) {
+                setPageState(prevState => ({...prevState, loadingComics: false, errorInFindComics: false}))
+                setComicsData( { id: characterId, data: findComics.data.results } )
+            }
+       
 
 
 
@@ -121,48 +111,67 @@ function MainPage() {
     }
 
 
+    const signOutState = () => !loadingUserData && !userData ? <SignOutPage/> : '' 
+    const loadingPageState = () => { return (loadingUserData && (!userData ||userData) ?
+        <>
+            <div className='loading-main-page'>
+                <div className='loading-search'>
+                    <div>
+                        <Skeleton width='100%' height='100%'/>
+                    </div>
+                    <div>
+                        <Skeleton width='100%' height='100%'/>
+                    </div>
+                </div>
+                <div className='loading-searchResults'>
+                    <Skeleton width='100%' height='100%'/>
+                </div>
+            </div>      
+        </> : '')
+    }
+    const successUserLoadedState = () => !loadingUserData && userData ? true : false
+    const successCharacterLoadedState = () => charactersData ? true : false
+    
+
     return (
         <>
             <Layout>
-                { !loadingUserData && !userData ?
-                    <>
-                        <SignOutPage/>
-                    </> : ''
-                }
-                { loadingUserData && !userData ?
-                    <>
-                        <div className='loading-main-page'>
-                            <div className='loading-search'>
-                                <div>
-                                    <Skeleton width='100%' height='100%'/>
-                                </div>
-                                <div>
-                                    <Skeleton width='100%' height='100%'/>
-                                </div>
-                            </div>
-                            <div className='loading-searchResults'>
-                                <Skeleton width='100%' height='100%'/>
-                            </div>
-                        </div>      
-                    </> : ''
-                }
-                { !loadingUserData && userData ?
+                { signOutState() }
+                { loadingPageState() }
+
+                { successUserLoadedState() ?
                     <>
                         <div className='main-page'>
                             <h1>Search characters!</h1>
                             <Search 
                                 searchCharacters={searchCharacters}
-                                setErrors={setErrors}
-                                setLoadings={setLoadings}
+                                setPageState={setPageState}
                             />
-                            <ResultsContainer 
-                                charactersData={charactersData} 
-                                searchComics={searchComics} 
-                                comicsData={comicsData}                                 
-                                saveComic={saveComic}
-                                loadings={loadings}
-                                errors={errors}
-                            />                      
+                            <ResultsContainer
+                                charactersData={charactersData}
+                                pageState={pageState}
+                             
+                            >
+                                { successCharacterLoadedState() ?
+                                    charactersData.map((character) => (
+                                        <CharacterResult
+                                            key={character.id}
+                                            id={character.id}
+                                            name={character.name}
+                                            img={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+                                            searchComics={searchComics}
+                                        > 
+                                            <ComicsResult 
+                                                userSavedComics={userSavedComics}
+                                                comicsData={comicsData} 
+                                                characterId={character.id}
+                                                saveComic={saveComic}
+                                                pageState={pageState}
+                                            />
+                                        </CharacterResult>
+                                    )) : ''
+                                }
+                            </ResultsContainer>                      
                         </div>   
                     </> : ''
                 }

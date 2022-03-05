@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { SearchInput } from '../components/inputs/SearchInput';
 import { CheckboxInput } from '../components/inputs/CheckboxInput'
 
-function Search( { searchCharacters, setErrors, setLoadings } ) {
+function Search( { 
+    searchCharacters, 
+    setPageState
+
+}) {
     const [ searchValue, setSearchValue ] = useState('')
     const [ searchOptions, setSearchOptions ] = useState([
         {value: 10, checked: false}, 
@@ -11,9 +15,7 @@ function Search( { searchCharacters, setErrors, setLoadings } ) {
 
 
     function onHandleChange(e) {
-        
-        setLoadings(prevState => ({...prevState, loading: ''}))
-        setErrors({ error: false })
+        setPageState(prevState => ({...prevState, loading: '', error: false }))
         setSearchValue(e.target.value)
     }
 
@@ -56,8 +58,6 @@ function Search( { searchCharacters, setErrors, setLoadings } ) {
             setSearchOptions(newOptions)
         }
         
-        
-        
     }
     
     
@@ -67,7 +67,7 @@ function Search( { searchCharacters, setErrors, setLoadings } ) {
         <>
             <div className='search'>
                 <SearchInput 
-                    placeholder={'spiderman'}
+                    placeholder={'spider-man'}
                     value={searchValue}
                     onChange={onHandleChange}
                     onClick={ () => searchCharacters(searchOptions, searchValue) }
