@@ -64,7 +64,7 @@ function LoginForm({
                         />
                     </form>
                 <div className='login-options'>
-                    <p className='login-options-forgotPassword'>forgot password? <a >click here</a></p>
+                    {/* <p className='login-options-forgotPassword'>forgot password? <a >click here</a></p> */}
                     <p className='login-options-register'>You don't have an account?<br /><Link to="/register">register here</Link></p>
                 </div>
             </div> 

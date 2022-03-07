@@ -4,6 +4,18 @@
     align-items: center;
     width: 180px;
     height: 265px;
+    transition-property: width, height;
+    transition-duration: 0.5s, 0.5s;
+    
+    &:hover {
+        width: 183px;
+        height: 268px;
+        cursor: pointer;
+    }
+
+    &:hover > &-img {
+        background-color: rgba(229, 218, 194, 0.164);
+    }
     
     
     &-img {
@@ -12,6 +24,7 @@
         height: inherit;
         margin: 0;
         padding: 15px;
+        border-radius: 5px;
         background-color: rgba(229,218,194, 2%);
         
         img {
@@ -19,6 +32,8 @@
             height: 100%;
         }
     }
+
+     
 
     &-title {
         margin: 5px;

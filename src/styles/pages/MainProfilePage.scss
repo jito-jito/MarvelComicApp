@@ -47,10 +47,11 @@
 .favoriteComics {
     &-container {
         display: grid;
-        grid-template-columns: auto auto auto auto;
-        grid-auto-rows: auto auto;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 285px 285px;
+        grid-auto-rows: 285px 285px;
         grid-gap: 30px;
-        row-gap: 60px;
+        row-gap: 75px;
         justify-content: space-between;
         height: 100%;
         padding: 50px 0;
@@ -59,14 +60,14 @@
 
     @media (max-width: 1025px) {
         &-container {
-            grid-template-columns: auto auto auto;
+            grid-template-columns: 1fr 1fr 1fr;
         }
     
     }
 
     @media (max-width: 715px) {
         &-container {
-            grid-template-columns: auto auto ;
+            grid-template-columns: 1fr 1fr ;
             justify-content: space-around
         }
     
@@ -74,7 +75,8 @@
 
     @media (max-width: 455px) {
         &-container {
-            grid-template-columns: auto ;
+            grid-template-columns: 1fr ;
+            justify-items: center;
         }
     
     }

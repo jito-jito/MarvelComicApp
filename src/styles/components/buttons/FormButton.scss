@@ -47,3 +47,16 @@
     width: 200px;
     margin: 40px 0 30px 0;
 }
+
+.modal-mainProfile {
+    align-self: center;
+    width: 175px;
+    height: 45px;
+    margin: 20px 0 10px 0;
+    
+    @media (max-width: 625px) {
+        width: 160px;
+        height: 40px;
+        margin: 10px 0 10px 0;
+    }
+}

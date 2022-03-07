@@ -28,7 +28,6 @@ function MainPage() {
         }
     )
 
-    
     async function searchCharacters( options, searchValue ) {
         setPageState(prevState => ({...prevState, loading: true}))
 
@@ -60,21 +59,22 @@ function MainPage() {
     }
 
     async function searchComics(e, characterId) {
+        setComicsData([])
         setPageState(prevState => ({...prevState, error: false, loadingComics: true,  characterLoading: characterId, errorInFindComics: false }))
 
         try {
             const findComics = await getData(`https://gateway.marvel.com:443/v1/public/characters/${characterId}/comics?apikey=${process.env.REACT_APP_MARVEL_API_KEY}`)
-            
+
             if (findComics.code != 200) {
                 throw 'error in get data'
             }
             
-            if (findComics.data.count == 0) {
+            if (findComics.data.count == 0 || findComics.data.results.length == 0 ) {
                 console.log('comics not found in marvel api')
                 setPageState(prevState => ({...prevState, loadingComics: false,  errorInFindComics: true, characterLoading: characterId}))
             }
 
-            if(findComics.data.count > 0) {
+            if(findComics.data.count > 0 && findComics.data.results.length > 0 ) {
                 setPageState(prevState => ({...prevState, loadingComics: false, errorInFindComics: false}))
                 setComicsData( { id: characterId, data: findComics.data.results } )
             }

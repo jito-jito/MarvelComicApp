@@ -7,15 +7,30 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getUser } from '../utils/lib/getUser'
 import { updateUserComics } from '../utils/lib/updateUserComics'
 import { SignOutPage } from './SignOutPage'
+import { ModalComicFavorite } from '../containers/ModalComicFavorite'
 
 import Skeleton from 'react-loading-skeleton'
 
 function MainProfilePage() {
     const { userData, loadingUserData, userSavedComics, setUserSavedComics } = useContext(UserContext)
+    const [ openModal, setOpenModal ] = useState({
+        state: false,
+        id: null
+    })
     let navigate = useNavigate()
 
+
+    function goToMarvelPage(url) {
+        window.open(url, "_blank");
+    }
+
+    function toggleModal(e, value) {
+        e.stopPropagation()
+        setOpenModal(value)
+    }
+
     async function deleteComic(e, comicId) {
-    
+        e.stopPropagation()
         const userDbId = await getUser(userData)
         let selectedComicData = userSavedComics.find((comic) => comic.comicId == comicId)
         selectedComicData.id = selectedComicData.comicId
@@ -24,8 +39,6 @@ function MainProfilePage() {
 
         setUserSavedComics(newComics)
     }
-
-
 
     const signOutState = () => { return ( !loadingUserData && !userData ?    
         <>
@@ -86,13 +99,33 @@ function MainProfilePage() {
                                     <h1 className='mainProfile-title'>Your favorite comics:</h1>
                                     <section className='favoriteComics-container'>
                                         {userSavedComics.map(comic => (
-                                            <ComicFavorite
-                                                key={comic.comicId}
-                                                comicId={comic.comicId}
-                                                img={ comic.images[0] ? `${comic.images[0].path}.${comic.images[0].extension}` : `${comic.thumbnail.path}.${comic.thumbnail.extension}`}
-                                                title={comic.title}
-                                                deleteComic={deleteComic}
-                                            />
+                                            <>
+                                                <ComicFavorite
+                                                    key={comic.comicId}
+                                                    comicId={comic.comicId}
+                                                    img={ comic.images[0] ? `${comic.images[0].path}.${comic.images[0].extension}` : `${comic.thumbnail.path}.${comic.thumbnail.extension}`}
+                                                    title={comic.title}
+                                                    deleteComic={deleteComic}
+                                                    toggleModal={toggleModal}
+                                                    
+                                                    
+                                                />
+
+                                             
+
+                                                <ModalComicFavorite
+                                                    openModal={openModal}
+                                                    modalId={comic.comicId}
+                                                    title={comic.title}
+                                                    description={comic.description}
+                                                    img={ comic.images[0] ? `${comic.images[0].path}.${comic.images[0].extension}` : `${comic.thumbnail.path}.${comic.thumbnail.extension}`}
+                                                    urls={comic.urls}
+                                                    toggleModal={toggleModal}
+                                                    goToMarvelPage={goToMarvelPage}
+                                                /> 
+
+                                            </>
+                                            
                                         ))}
                                                                     
                                     </section>

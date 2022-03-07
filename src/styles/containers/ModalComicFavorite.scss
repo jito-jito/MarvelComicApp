@@ -1,0 +1,91 @@
+.modal-comicFavorite {
+    @include displayFlex-center;
+    position: relative;
+    width: 750px;
+    height: 500px;
+    padding: 50px;
+    background-color: rgba(0, 0, 0, 0.95);
+    border-radius: 25px;
+
+    &-img {
+        width: 235px;
+        height: 100%;
+        margin: 0;
+
+        img {
+            width: inherit;
+            height: inherit;
+        }
+    }
+
+    &-data {
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column;
+        height: 100%;
+        padding-left: 30px;
+
+        h1, p {
+            margin: 0;
+        }
+
+        p {
+            display: -webkit-box;
+            -webkit-line-clamp: 10;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            width: 100%;
+            margin: 15px 0 0 10px;
+            
+        }
+        
+    }
+
+    &-closeButton {
+        position: absolute;
+        top: -15px;
+        right: -10px; 
+    }
+    
+
+    @media (max-width: 830px) {
+        width: 90%;
+        
+    }
+
+    @media (max-width: 730px) {
+        &-img {
+            width: 200px;
+            height: 90%;
+            margin: 0;
+
+        }
+    }
+    
+    @media (max-width: 625px) {
+        flex-direction: column;
+        height: max-content;
+        padding: 15px 40px;
+        &-img {
+            width: 170px;
+            margin: 15px 0;
+
+        }
+
+        &-data {
+            padding: 0;
+            text-align: center;
+            h3 {
+                margin: 12px 0 5px 0;
+            }
+
+            p {
+                -webkit-line-clamp: 7;
+                margin: 5px 0 0 0;
+            }
+        }
+
+        
+
+    }
+}

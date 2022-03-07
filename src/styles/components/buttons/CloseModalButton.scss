@@ -1,0 +1,13 @@
+.closeModal-button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url('../../../assets/images/closeIcon.png');
+
+    &:hover {
+        cursor: pointer;
+    }
+}

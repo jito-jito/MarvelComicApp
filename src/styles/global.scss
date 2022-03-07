@@ -51,6 +51,16 @@ body {
     color: $font-color1
 }
 
+.modal-container {
+    @include displayFlex-center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    padding: 0 10px;
+    background-color: rgba(0, 0, 0, 0.452);
+}
 
 @import './skeleton.scss';
 
@@ -62,8 +72,8 @@ body {
 @import './components/inputs/SearchInput.scss';
 @import './components/inputs/CheckboxInput.scss';
 @import './components/ScrollBar.scss';
-@import './components/ComicFavorite.scss';
 @import './components/buttons/DeleteButton.scss';
+@import './components/buttons/CloseModalButton.scss';
 
 @import './containers/Header.scss';
 @import './containers/LoginForm.scss';
@@ -73,6 +83,8 @@ body {
 @import './containers/User.scss';
 @import './containers/CharacterResult.scss';
 @import './containers/ComicsResult.scss';
+@import './containers/ComicFavorite.scss';
+@import './containers//ModalComicFavorite.scss';
 
 @import './pages/LoginPage.scss';
 @import './pages/RegisterPage.scss';
