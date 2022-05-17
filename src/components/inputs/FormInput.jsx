@@ -1,27 +1,25 @@
-import React from 'react';
+import React from 'react'
 
-
-function FormInput({ 
-    placeHolder, 
-    className, 
-    type, 
-    value,  
-    onChange, 
-    id
+function FormInput ({
+  placeHolder,
+  className,
+  type,
+  value,
+  onChange,
+  id
 }) {
-
-    return(
-        <>
-            <input 
-                className={`form-input ${className}`}
-                type={type}
-                id={id}
-                placeholder={placeHolder} 
-                value={value}
-                onChange={onChange}
-            />
-        </>
-    )
+  return (
+    <>
+      <input
+        className={`form-input ${className}`}
+        type={type}
+        id={id}
+        placeholder={placeHolder}
+        value={value}
+        onChange={onChange}
+      />
+    </>
+  )
 }
 
 export { FormInput }

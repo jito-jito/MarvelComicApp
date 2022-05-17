@@ -1,24 +1,22 @@
-import {getDocs, collection } from "firebase/firestore";
-import { db } from './firebase';
+import { getDocs, collection } from 'firebase/firestore'
+import { db } from './firebase'
 
-async function getUserComics(userId) {    
-    let data = []
+async function getUserComics (userId) {
+  let data = []
 
-    const userComicsRef = collection(db, `users/${userId}/comics`)
-    const userComicsQuerySnapshot = await getDocs(userComicsRef);
-    // console.log(userComicsQuerySnapshot)
-    
-    if(userComicsQuerySnapshot.empty) {
-        data = []
-    } else {
-        userComicsQuerySnapshot.forEach(comic => {
-            data.push(comic.data())
-            
-        });
-    }
+  const userComicsRef = collection(db, `users/${userId}/comics`)
+  const userComicsQuerySnapshot = await getDocs(userComicsRef)
+  // console.log(userComicsQuerySnapshot)
 
-    return data
+  if (userComicsQuerySnapshot.empty) {
+    data = []
+  } else {
+    userComicsQuerySnapshot.forEach(comic => {
+      data.push(comic.data())
+    })
+  }
+
+  return data
 }
-
 
 export { getUserComics }
