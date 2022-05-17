@@ -1,167 +1,162 @@
-//react
-import React, { useContext, useState } from 'react';
-import { RegisterForm } from '../containers/RegisterForm';
-import { UserContext } from '../UserContext';
-import { useNavigate } from 'react-router-dom';
+// react
+import React, { useContext, useState } from 'react'
+import { RegisterForm } from '../containers/RegisterForm'
+import { UserContext } from '../UserContext'
+import { useNavigate } from 'react-router-dom'
 
-//auth
-import { registerUser } from '../utils/auth/createUserWithCredentials';
-import { updateUserData } from '../utils/auth/updateUserData';
+// auth
+import { registerUser } from '../utils/auth/createUserWithCredentials'
+import { updateUserData } from '../utils/auth/updateUserData'
 
-function RegisterPage() {
-    const { userData } = useContext( UserContext )
-    let navigate = useNavigate()
+function RegisterPage () {
+  const { userData } = useContext(UserContext)
+  const navigate = useNavigate()
 
-    if(userData) {
-        navigate('/search', { replace: true })
+  if (userData) {
+    navigate('/search', { replace: true })
+  }
+
+  const [credentials, setCredentials] = useState({
+    nickName: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: ''
+  })
+  const [pageState, setPageState] = useState({
+    error: {
+      invalidNames: false,
+      invalidEmail: false,
+      invalidPassword: false,
+      invalidCredentials: false,
+      firebaseEmail: false
+    },
+    loading: false
+  })
+
+  function onHandleChange (e) {
+    setPageState(prevState => ({
+      ...prevState,
+      error: {
+        invalidNames: false,
+        invalidEmail: false,
+        invalidPassword: false,
+        invalidCredentials: false,
+        firebaseEmail: false
+      }
+    }))
+
+    // console.log(e.target)
+    if (e.target.id === 'nickName') {
+      setCredentials({ ...credentials, nickName: e.target.value })
+    }
+    if (e.target.id === 'firstName') {
+      setCredentials({ ...credentials, firstName: e.target.value })
+    }
+    if (e.target.id === 'lastName') {
+      setCredentials({ ...credentials, lastName: e.target.value })
+    }
+    if (e.target.id === 'email') {
+      setCredentials({ ...credentials, email: e.target.value })
+    }
+    if (e.target.id === 'password') {
+      setCredentials({ ...credentials, password: e.target.value })
+    }
+  }
+
+  function validateNames (arrayNames) {
+    const hasInvalidNames = arrayNames.some((name) => name.length < 4)
+
+    if (hasInvalidNames) {
+      return true
     }
 
-    const [ credentials , setCredentials ] = useState({
-        nickName: '',
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: '',
-    })
-    const [ pageState, setPageState ] = useState({
-        error: {
-            invalidNames: false,
-            invalidEmail: false,
-            invalidPassword: false,
-            invalidCredentials: false,
-            firebaseEmail: false
-        },
-        loading: false
-    })
+    return false
+  }
 
-    function onHandleChange(e) {
-        setPageState(prevState => ({...prevState, error: {
-            invalidNames: false,
-            invalidEmail: false,
-            invalidPassword: false,
-            invalidCredentials: false,
-            firebaseEmail: false
-        }}))
-    
-        // console.log(e.target)
-        if(e.target.id == 'nickName') {
-            setCredentials({...credentials, nickName: e.target.value})
-        }
-        if(e.target.id == 'firstName') {
-            setCredentials({...credentials, firstName: e.target.value})
-        }
-        if(e.target.id == 'lastName') {
-            setCredentials({...credentials, lastName: e.target.value})
-        }
-        if(e.target.id == 'email') {
-            setCredentials({...credentials, email: e.target.value})
-        }
-        if(e.target.id == 'password') {
-            setCredentials({...credentials, password: e.target.value})
-        }
+  function validateEmail (email) {
+    const hasValidEmail = String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      )
+
+    if (!hasValidEmail) {
+      return true
+    } else {
+      return false
     }
+  }
 
-    function validateNames(arrayNames) {
-        const hasInvalidNames = arrayNames.some((name) => name.length < 4 )
+  function validatePassword (password) {
+    const hasValidPassword = password.length > 6
 
-        if(hasInvalidNames) {
-            return  true
-        }
-
-        return false
-       
-
+    if (!hasValidPassword) {
+      return true
+    } else {
+      return false
     }
+  }
 
-    function validateEmail(email) {
-        const hasValidEmail = String(email)
-        .toLowerCase()
-        .match(
-            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        );
+  function validateCredentials (credentials) {
+    const areValidNames = validateNames([
+      credentials.nickName,
+      credentials.firstName,
+      credentials.lastName
+    ])
 
-        if(!hasValidEmail) {
-            return true
-        } else {
-            return false
-        }
+    const isValidEmail = validateEmail(credentials.email)
 
-        return 
+    const isValidPassword = validatePassword(credentials.password)
+
+    return {
+      invalidNames: areValidNames,
+      invalidEmail: isValidEmail,
+      invalidPassword: isValidPassword
     }
+  }
+  async function submmitData (e) {
+    e.preventDefault()
 
-    function validatePassword(password) {
-        const hasValidPassword = password.length > 6
+    try {
+      const areValidCredentials = validateCredentials(credentials)
+      const hasError = Object.entries(areValidCredentials).some(validations => validations[1] == true)
 
-        if(!hasValidPassword) {
-            return true
-        } else {
-            return false
-        }
+      if (hasError) {
+        setPageState(prevState => ({ ...prevState, error: { ...areValidCredentials, invalidCredentials: true } }))
+        throw 'error, invalid credentials'
+      }
+      setPageState(prevState => ({ ...prevState, loading: true }))
+
+      const createUser = await registerUser(credentials.email, credentials.password)
+
+      if (createUser === 'Firebase: Error (auth/email-already-in-use).') {
+        setPageState(prevState => ({ ...prevState, error: { firebaseEmail: true } }))
+      }
+
+      if (createUser.user) {
+        const updateData = await updateUserData(`${credentials.firstName} ${credentials.lastName}`)
+      }
+
+      setPageState(prevState => ({ ...prevState, loading: false }))
+    } catch (error) {
+      // console.log(error)
+      console.log('error, user already exist')
     }
+  }
 
-    function validateCredentials(credentials) {
-
-        const areValidNames = validateNames([
-            credentials.nickName,
-            credentials.firstName,
-            credentials.lastName
-        ])
-      
-        const isValidEmail = validateEmail(credentials.email)
-
-        const isValidPassword = validatePassword(credentials.password)
-
-        return {
-            invalidNames: areValidNames,
-            invalidEmail: isValidEmail,
-            invalidPassword: isValidPassword
-        }
-    }
-    async function submmitData(e) {
-        e.preventDefault()
-        
-        try {
-            const areValidCredentials = validateCredentials(credentials)
-            const hasError = Object.entries(areValidCredentials).some(validations => validations[1] == true)
-
-            
-            if(hasError) {
-                setPageState(prevState => ({ ...prevState, error: { ...areValidCredentials, invalidCredentials: true}}))
-                throw 'error, invalid credentials'
-            }
-            setPageState(prevState => ({ ...prevState, loading: true}))
-            
-            const createUser = await registerUser(credentials.email, credentials.password)
-            
-            if( createUser == 'Firebase: Error (auth/email-already-in-use).') {
-                setPageState(prevState => ({ ...prevState, error: { firebaseEmail: true }}))
-            }
-
-            if(createUser.user) {
-                const updateData = await updateUserData(`${credentials.firstName} ${credentials.lastName}`)
-            }
-
-            setPageState(prevState => ({ ...prevState, loading: false}))
-
-        } catch(error) {
-            // console.log(error)
-            console.log('error, user already exist')
-        }
-        
-    }
-
-    return(
-        <>
-            <div className='register-page'>
-                <RegisterForm
-                    credentials={credentials}
-                    onHandleChange={onHandleChange}
-                    submmitData={submmitData}
-                    pageState={pageState}
-                />
-            </div>
-        </>
-    )
+  return (
+    <>
+      <div className='register-page'>
+        <RegisterForm
+          credentials={credentials}
+          onHandleChange={onHandleChange}
+          submmitData={submmitData}
+          pageState={pageState}
+        />
+      </div>
+    </>
+  )
 }
 
 export { RegisterPage }

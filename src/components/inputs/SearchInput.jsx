@@ -1,32 +1,29 @@
-import React from 'react';
+import React from 'react'
 
-
-function SearchInput({
-    placeholder, 
-    value, 
-    onChange,
-    onClick 
+function SearchInput ({
+  placeholder,
+  value,
+  onChange,
+  onClick
 }) {
+  return (
+    <>
+      <div className='search-input-container'>
+        <input
+          className='search-input'
+          type='text'
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+        />
+        <button
+          className='search-input-button'
+          onClick={onClick}
+        />
+      </div>
 
-    return(
-        <>
-            <div className='search-input-container'>
-                <input 
-                    className='search-input' 
-                    type="text" 
-                    placeholder={placeholder} 
-                    value={value}
-                    onChange={onChange}
-                />
-                <button 
-                    className='search-input-button'
-                    onClick={onClick}
-                ></button>
-            </div>
-                                
-        </>
-    )
+    </>
+  )
 }
 
-
-export  { SearchInput }
+export { SearchInput }
